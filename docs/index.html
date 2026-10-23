@@ -1,70 +1,10 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#020b22">
-  <meta name="description" content="Propuesta interactiva de Started-AI">
-  <title>Started-AI</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <main class="experience" aria-live="polite">
-    <section class="scene intro active" data-scene="0" aria-label="Portada">
-      <div class="cosmos" aria-hidden="true"></div>
-      <div class="cover-stage">
-        <img class="cover-image cover-base" src="assets/started-ai-cover.png" alt="Started-AI">
-        <div class="logo-shards" aria-hidden="true">
-          <div class="shard shard-a"></div>
-          <div class="shard shard-b"></div>
-          <div class="shard shard-c"></div>
-          <div class="shard shard-d"></div>
-          <div class="shard shard-e"></div>
-        </div>
-        <div class="energy-core" aria-hidden="true"></div>
-        <div class="scan" aria-hidden="true"></div>
-      </div>
-      <button class="enter-experience" data-next aria-label="Comenzar la experiencia">
-        <span>Comenzar la experiencia</span>
-      </button>
-    </section>
-
-    <section class="scene slide" data-scene="1" aria-label="Coste de contratar a diez personas">
-      <img src="assets/01-coste-actual.png" alt="Coste de contratar a diez personas: 20.000 euros al mes y 240.000 euros al año">
-    </section>
-    <section class="scene slide" data-scene="2" aria-label="Coste a largo plazo">
-      <img src="assets/02-coste-largo-plazo.png" alt="Coste acumulado durante veinte y cuarenta años">
-    </section>
-    <section class="scene slide" data-scene="3" aria-label="Fabricación de Sofía y Jordan">
-      <img src="assets/03-fabricacion.png" alt="Fabricación de los agentes de inteligencia artificial Sofía y Jordan">
-    </section>
-    <section class="scene slide" data-scene="4" aria-label="Servicio anual">
-      <img src="assets/04-servicio.png" alt="Servicio anual con cuatro desarrolladores y asistencia continua">
-    </section>
-    <section class="scene slide" data-scene="5" aria-label="Propuesta total">
-      <img src="assets/05-propuesta.png" alt="Propuesta total de Started-AI">
-    </section>
-
-    <section class="scene closing" data-scene="6" aria-label="Cierre">
-      <div class="closing-card">
-        <span class="eyebrow">STARTED-AI</span>
-        <h2>¿Hablamos de vuestro caso?</h2>
-        <p>Podemos adaptar el alcance de Sofía, Jordan y las campañas a las necesidades reales del equipo.</p>
-        <button class="primary" data-restart>Ver de nuevo <span>↻</span></button>
-      </div>
-    </section>
-
-    <header class="topbar" hidden>
-      <strong>Started-AI</strong>
-      <span id="counter">1 de 5</span>
-    </header>
-
-    <nav class="controls" hidden aria-label="Controles de la presentación">
-      <button class="nav-button" data-prev aria-label="Pantalla anterior">← <span>Anterior</span></button>
-      <div class="progress" aria-hidden="true"><i></i></div>
-      <button class="nav-button next" data-next><span>Siguiente</span> →</button>
-    </nav>
-  </main>
-  <script src="app.js"></script>
-</body>
-</html>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#01050d"><meta name="description" content="Experiencia interactiva Started-AI"><title>Started-AI — Experiencia</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="motion.css"></head><body>
+<main class="film" aria-label="Propuesta interactiva Started-AI"><div class="stage"><div class="stars" aria-hidden="true"></div>
+<article class="scene cover" data-scene="0"><div class="ambient cover-ambient"></div><div class="cover-art"><img src="assets/started-ai-cover.png" alt="Started-AI"><i class="beam"></i><i class="flare"></i></div><div class="scroll-cue"><i>↑</i><span>DESLIZA HACIA ARRIBA</span></div></article>
+<article class="scene visual" data-scene="1" style="--image:url('assets/01-coste-actual.png')"><div class="ambient"></div><div class="depth back"></div><div class="depth main"></div><div class="depth glass"></div></article>
+<article class="scene visual" data-scene="2" style="--image:url('assets/02-coste-largo-plazo.png')"><div class="ambient"></div><div class="depth back"></div><div class="depth main"></div><div class="depth glass"></div></article>
+<article class="scene visual" data-scene="3" style="--image:url('assets/03-fabricacion.png')"><div class="ambient"></div><div class="depth back"></div><div class="depth main"></div><div class="depth glass"></div></article>
+<article class="scene visual" data-scene="4" style="--image:url('assets/04-servicio.png')"><div class="ambient"></div><div class="depth back"></div><div class="depth main"></div><div class="depth glass"></div></article>
+<article class="scene visual" data-scene="5" style="--image:url('assets/05-propuesta.png')"><div class="ambient"></div><div class="depth back"></div><div class="depth main"></div><div class="depth glass"></div></article>
+<article class="scene ending" data-scene="6"><div class="ending-orbit"></div><img src="assets/started-ai-logo.png" alt="Started-AI"><p>La nueva forma de trabajar empieza aquí.</p><button data-restart>VOLVER AL INICIO</button></article>
+<header class="hud"><span class="brand">STARTED–AI</span><span class="count">00 / 06</span></header><aside class="rail" aria-hidden="true"><i></i></aside><div class="chapter" aria-hidden="true">INICIO</div></div><div class="scroll-space" aria-hidden="true"></div></main><script src="app.js"></script></body></html>

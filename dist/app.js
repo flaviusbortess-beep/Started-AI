@@ -1,57 +1,46 @@
 const scenes=[...document.querySelectorAll('.scene')];
-const topbar=document.querySelector('.topbar');
-const controls=document.querySelector('.controls');
-const counter=document.querySelector('#counter');
-const progress=document.querySelector('.progress i');
-let current=0;
-let transitioning=false;
+const rail=document.querySelector('.rail i');
+const count=document.querySelector('.count');
+const chapter=document.querySelector('.chapter');
+const labels=['INICIO','EL COSTE ACTUAL','EL COSTE EN EL TIEMPO','SOFÍA + JORDAN','ASISTENCIA 24/7','LA PROPUESTA','STARTED–AI'];
+let target=0,current=0,ticking=false;
+const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
+const ease=n=>n<.5?4*n*n*n:1-Math.pow(-2*n+2,3)/2;
 
-const cosmos=document.querySelector('.cosmos');
-for(let i=0;i<42;i++){
-  const spark=document.createElement('i');
-  spark.className='spark';
-  spark.style.setProperty('--x',`${Math.random()*100}%`);
-  spark.style.setProperty('--y',`${Math.random()*100}%`);
-  spark.style.setProperty('--s',`${1+Math.random()*3}px`);
-  spark.style.setProperty('--d',`${2.8+Math.random()*4}s`);
-  spark.style.setProperty('--delay',`${Math.random()*-6}s`);
-  spark.style.setProperty('--dx',`${(Math.random()-.5)*90}px`);
-  spark.style.setProperty('--dy',`${(Math.random()-.5)*90}px`);
-  cosmos.appendChild(spark);
+function draw(){
+  current+=(target-current)*.095;
+  if(Math.abs(target-current)<.0001)current=target;
+  const max=scenes.length-1;
+  scenes.forEach((scene,i)=>{
+    const d=i-current,a=clamp(1-Math.abs(d)*1.35);
+    scene.classList.toggle('live',Math.abs(d)<1.12);
+    scene.style.opacity=a;
+    scene.style.transform=`translate3d(${d*18}vw,0,${-Math.abs(d)*420}px) rotateY(${d*-8}deg) scale(${1-Math.abs(d)*.09})`;
+    scene.style.filter=`blur(${Math.abs(d)*2.2}px) brightness(${.62+a*.38})`;
+    const local=clamp(current-i+.5),main=scene.querySelector('.main'),back=scene.querySelector('.back'),glass=scene.querySelector('.glass'),cover=scene.querySelector('.cover-art');
+    if(main)main.style.transform=`scale(${.91+ease(local)*.12}) translate3d(${(local-.5)*-2.5}vw,${(local-.5)*-1.5}vh,${local*90}px)`;
+    if(back)back.style.transform=`scale(${1.12-local*.06}) translateX(${(local-.5)*5}vw)`;
+    if(glass)glass.style.transform=`translateX(${(local-.5)*34}vw) skewX(-4deg)`;
+    if(cover)cover.style.transform=`scale(${1+local*.24}) translate3d(${local*-8}vw,0,${local*190}px) rotateY(${local*-8}deg)`;
+  });
+  const index=Math.min(max,Math.max(0,Math.round(current)));
+  count.textContent=`${String(index).padStart(2,'0')} / 06`;
+  chapter.textContent=labels[index];
+  rail.style.height=`${current/max*100}%`;
+  if(Math.abs(target-current)>.0001)requestAnimationFrame(draw);else ticking=false;
 }
 
-function show(index){
-  current=Math.max(0,Math.min(index,scenes.length-1));
-  scenes.forEach((scene,i)=>scene.classList.toggle('active',i===current));
-  const inSlides=current>=1&&current<=5;
-  topbar.hidden=!inSlides;
-  controls.hidden=current===0||current===6;
-  if(inSlides){counter.textContent=`${current} de 5`;progress.style.width=`${current*20}%`}
-  document.querySelector('[data-prev]').style.visibility=current<=1?'hidden':'visible';
-  const next=document.querySelector('.controls [data-next] span');
-  if(next)next.textContent=current===5?'Finalizar':'Siguiente';
+function update(){
+  const maxScroll=document.documentElement.scrollHeight-innerHeight;
+  target=clamp(scrollY/maxScroll)*6;
+  if(!ticking){ticking=true;requestAnimationFrame(draw)}
 }
 
-function next(){
-  if(transitioning)return;
-  if(current===0){
-    transitioning=true;
-    scenes[0].classList.add('leaving');
-    setTimeout(()=>{show(1);scenes[0].classList.remove('leaving');transitioning=false},1320);
-    return;
-  }
-  show(current+1);
-}
-
-document.querySelectorAll('[data-next]').forEach(button=>button.addEventListener('click',next));
-document.querySelector('[data-prev]').addEventListener('click',()=>show(current-1));
-document.querySelector('[data-restart]').addEventListener('click',()=>show(0));
-document.addEventListener('keydown',event=>{
-  if(['ArrowRight','Enter',' '].includes(event.key)){event.preventDefault();next()}
-  if(event.key==='ArrowLeft'){event.preventDefault();show(current-1)}
-  if(event.key==='Escape')show(0);
+addEventListener('scroll',update,{passive:true});
+addEventListener('resize',update);
+document.querySelector('[data-restart]').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+document.addEventListener('keydown',e=>{
+  if(['ArrowDown','ArrowRight',' '].includes(e.key)){e.preventDefault();scrollBy({top:innerHeight*.92,behavior:'smooth'})}
+  if(['ArrowUp','ArrowLeft'].includes(e.key)){e.preventDefault();scrollBy({top:-innerHeight*.92,behavior:'smooth'})}
 });
-let startX=0;
-document.addEventListener('touchstart',e=>startX=e.changedTouches[0].clientX,{passive:true});
-document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>60){if(dx<0)next();else show(current-1)}},{passive:true});
-show(0);
+update();draw();
