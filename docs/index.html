@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#020b22">
+  <meta name="description" content="Propuesta interactiva de Started-AI">
+  <title>Started-AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="experience" aria-live="polite">
+    <section class="scene intro active" data-scene="0" aria-label="Portada">
+      <div class="cosmos" aria-hidden="true"></div>
+      <div class="cover-stage">
+        <img class="cover-image cover-base" src="assets/started-ai-cover.png" alt="Started-AI">
+        <div class="logo-shards" aria-hidden="true">
+          <div class="shard shard-a"></div>
+          <div class="shard shard-b"></div>
+          <div class="shard shard-c"></div>
+          <div class="shard shard-d"></div>
+          <div class="shard shard-e"></div>
+        </div>
+        <div class="energy-core" aria-hidden="true"></div>
+        <div class="scan" aria-hidden="true"></div>
+      </div>
+      <button class="enter-experience" data-next aria-label="Comenzar la experiencia">
+        <span>Comenzar la experiencia</span>
+      </button>
+    </section>
+
+    <section class="scene slide" data-scene="1" aria-label="Coste de contratar a diez personas">
+      <img src="assets/01-coste-actual.png" alt="Coste de contratar a diez personas: 20.000 euros al mes y 240.000 euros al año">
+    </section>
+    <section class="scene slide" data-scene="2" aria-label="Coste a largo plazo">
+      <img src="assets/02-coste-largo-plazo.png" alt="Coste acumulado durante veinte y cuarenta años">
+    </section>
+    <section class="scene slide" data-scene="3" aria-label="Fabricación de Sofía y Jordan">
+      <img src="assets/03-fabricacion.png" alt="Fabricación de los agentes de inteligencia artificial Sofía y Jordan">
+    </section>
+    <section class="scene slide" data-scene="4" aria-label="Servicio anual">
+      <img src="assets/04-servicio.png" alt="Servicio anual con cuatro desarrolladores y asistencia continua">
+    </section>
+    <section class="scene slide" data-scene="5" aria-label="Propuesta total">
+      <img src="assets/05-propuesta.png" alt="Propuesta total de Started-AI">
+    </section>
+
+    <section class="scene closing" data-scene="6" aria-label="Cierre">
+      <div class="closing-card">
+        <span class="eyebrow">STARTED-AI</span>
+        <h2>¿Hablamos de vuestro caso?</h2>
+        <p>Podemos adaptar el alcance de Sofía, Jordan y las campañas a las necesidades reales del equipo.</p>
+        <button class="primary" data-restart>Ver de nuevo <span>↻</span></button>
+      </div>
+    </section>
+
+    <header class="topbar" hidden>
+      <strong>Started-AI</strong>
+      <span id="counter">1 de 5</span>
+    </header>
+
+    <nav class="controls" hidden aria-label="Controles de la presentación">
+      <button class="nav-button" data-prev aria-label="Pantalla anterior">← <span>Anterior</span></button>
+      <div class="progress" aria-hidden="true"><i></i></div>
+      <button class="nav-button next" data-next><span>Siguiente</span> →</button>
+    </nav>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
